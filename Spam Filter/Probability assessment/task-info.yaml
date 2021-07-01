@@ -1,0 +1,63 @@
+type: edu
+files:
+- name: spam.py
+  visible: true
+  text: |
+    # write your code here
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from hstest.stage_test import List
+    from hstest import *
+    import pandas as pd
+
+
+    class NaiveBayesClassifier(StageTest):
+
+        def generate(self) -> List[TestCase]:
+            return [
+                TestCase(stdin="", attach=("", ""), time_limit=900000)
+            ]
+
+        def check(self, reply: str, attach):
+
+            df = reply.split('\n')
+
+            if len(df) != 202:
+                return CheckResult.wrong("Wrong number of rows and/or columns. Print the first 200 rows")
+
+            words = []
+            ham_prob = []
+            spam_prob = []
+
+            for oneRow in df[1:-1]:
+                word, spamp, hamp = oneRow.replace("\\", "").strip().split()
+                words.append(word)
+                spam_prob.append(spamp)
+                ham_prob.append(hamp)
+
+            if words[-5:] != ['anybody', 'anymore', 'anyplace', 'anythin', 'anytime']:
+                if words[-100:-95] != ['agent', 'agidhane', 'ago', 'agree', 'ah']:
+                    if words[-50:-45] != ['alright', 'alrite', 'alter', 'aluable', 'alwa']:
+                        return CheckResult.wrong("Wrong order of words in index")
+
+            if ham_prob[10:15] != ["0.000064", "0.000255", "0.000064", "0.000637", "0.000064"]:
+                if ham_prob[-15:-10] != ["0.000032", "0.000064", "0.000032", "0.000542", "0.000064"]:
+                    if ham_prob[-77:-73] != ['0.000064', "0.000096", "0.000032", "0.000223"]:
+                        return CheckResult.wrong("Wrong values in Ham probability")
+
+            if spam_prob[89:93] != ["0.000069", "0.000138", "0.000069", "0.000069"]:
+                if spam_prob[-109:-106] != ["0.000069", "0.000069", "0.000069"]:
+                    if spam_prob[:5] != ['0.000069', "0.000069", "0.000069", "0.144425", "0.000069"]:
+                        return CheckResult.wrong("Wrong values in Spam probability")
+
+            return CheckResult.correct()
+
+
+    if __name__ == '__main__':
+        NaiveBayesClassifier().run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/185/stages/941/implement#comment
+status: Unchecked
+record: -1

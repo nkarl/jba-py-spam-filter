@@ -1,0 +1,84 @@
+<h2>Description</h2>
+
+<p>Texts can be messy. It may be hard for computers to process them in their natural state. Computers tend to carry out operations on numbers with more ease. It would be a good idea to convert our text to vectors of numbers. The <strong>bag-of-words </strong>(BoW) model is a simple yet effective way to extract features from texts. </p>
+
+<p>The first step is to make a <strong>vocabulary</strong>. A vocabulary includes all unique words from the whole corpus, so the word occurrence frequency plays a rather minor role here. The second step is to create a <strong>vector of numbers </strong>by matching the occurrence of each word in a body of text to its position in the vocabulary:</p>
+
+<pre><code class="language-python">sentence_one = "Welcome to natural language processing"
+sentence_two = "Bag of words in natural language processing"
+
+vocabulary = ['natural', 'language', 'processing', 'in', 'welcome', 'bag', 'of', 'to', 'words']
+
+sentence_one_vector = [1, 1, 1, 0, 1, 0, 0, 1, 0]
+sentence_two_vector = [1, 1, 1, 1, 0, 1, 1, 0, 1]</code></pre>
+
+<p>Before creating a BoW model, you may need to split the dataframe into <strong>training </strong>and <strong>test </strong>sets. Randomize the data with <code class="language-python">seed=43</code> and split the dataframe in <strong>80:20</strong> <strong>proportion</strong>. Randomization can be achieved both with <code class="language-python">np.random.permutation</code> or <code class="language-python">pd.sample</code>. The illustration below shows how to split the dataset to get the training set:</p>
+
+<pre><code class="language-python">train_last_index = int(df.shape[0] * 0.8)
+train_set = df[0:train_last_index]</code></pre>
+
+<p>Let's describe how Bag-of-Words works. This function takes a <code class="language-python">pd.Series</code>, a <code class="language-python">pd.DataFrame</code> or a list of lists as a parameter and returns a <code class="language-python">pd.DataFrame</code>. The input data type can be various. It depends on your preference. This function can create a bag-of-word model both from training and test sets. The columns of the dataframe are sorted <strong>alphabetically</strong>, and they do not change. The words in each column are the unique words in the training set vocabulary.</p>
+
+<pre><code class="language-python">def bag_of_words(split_string, operation="train"):
+   pass
+</code></pre>
+
+<h2>Objectives</h2>
+
+<p>In this stage, your program should:</p>
+
+<ol>
+	<li>Randomize the rows in the dataframe;</li>
+	<li>Split the dataframe into training and test sets in 80:20 proportion;</li>
+	<li>Create a vocabulary of unique words from the <code class="language-python">SMS</code> column of the training set;</li>
+	<li>Create a bag-of-words function that returns a dataframe;</li>
+	<li>Print the first <strong>200 rows </strong>and the first <strong>50 columns </strong>of the modified dataframe.</li>
+</ol>
+
+<p>The test set will be converted to a vector of numbers first. So, we advise that you make your bag-of-word model as a function that can be used further. Although the input parameter in this stage is the training set, this function will be used to create a <strong>BoW dataframe </strong>for the test set in later stages.</p>
+
+<p>The dataframe contains a lot of columns. You can set the display options as shown below to display the results adequately:</p>
+
+<pre><code class="language-python">train_bag_of_words = bag_of_words(split_train_message)
+
+pd.options.display.max_columns = train_bag_of_words.shape[1]
+pd.options.display.max_rows = train_bag_of_words.shape[0]</code></pre>
+
+<p>The example above shows the output parameters for the training set. We display only the first twenty rows and the first five columns:</p>
+
+<pre><code class="language-python">print(train_bag_of_words.iloc[:22, :5])</code></pre>
+
+<p>However, to complete this stage, output the first two hundred rows and the first fifty columns.</p>
+
+<ol>
+</ol>
+
+<h2>Example</h2>
+
+<p>The greater-than symbol followed by a space (<code class="language-python">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1:</strong> <em>An example of your program output</em></p>
+
+<pre><code class="language-no-highlight">    Target                                                SMS  a  aa  aah
+0      ham                               dint sleep afternoon  0   0    0
+1      ham        maybe hi find card great escape wetherspoon  0   0    0
+2      ham                                      know pls open  0   0    0
+3      ham                               yep pretty sculpture  0   0    0
+4      ham                                           good day  0   0    0
+5      ham  meet stranger choose friend long world stand f...  0   0    0
+6     spam  review fantastic nokia n gage game deck club n...  0   0    0
+7      ham                yes know cheesy song frosty snowman  0   0    0
+8     spam                               trueåác c ringtoneåá  0   0    0
+9      ham     ambrith madurai meet u arun dha marrge remembr  0   0    0
+10     ham  joy lifeis wake daywith thought somewheresomeo...  0   0    0
+11     ham           r u sam p eachother meet aanumbers house  0   0    0
+12     ham hey darlin pick u college u tell wen aanumbers ...  0   0    0
+13     ham                                come mahal bus stop  0   0    0
+14     ham                 free nalla adi entey nattil kittum  0   0    0
+15     ham                                      haha yeah sec  0   0    0
+16     ham  thk aanumbers shd ok plus minus aanumbers ì leav.  0   0    0
+17    spam  eastender tv quiz flower dot compare violet tu...  0   0    0
+18    spam                  aanumbers new voicemail aanumbers  0   0    0
+19     ham                                      place want da  0   0    0
+20     ham                                            evening  0   0    0
+21    spam  gsoh good spam b male gigolo aanumbers join uk ..  0   0    0   </code></pre>

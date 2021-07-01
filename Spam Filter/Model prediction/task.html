@@ -1,0 +1,59 @@
+<h2>Description</h2>
+
+<p>In the previous stage, we have discussed the conditional probability of words from the spam subset:</p>
+
+<p><span class="math-tex">\[P(spam|word_1,word_2,...,word_n) = P(word_1|spam){*}P(word_2|spam){*}...{*}P(word_n|spam){*}P(spam)\]</span></p>
+
+<p>the conditional probability of words from ham is:</p>
+
+<p><span class="math-tex">\[P(ham|word_1,word_2,...,word_n) = P(word_1|ham){*}P(word_2|ham){*}...{*}P(word_n|ham){*}P(ham)\]</span></p>
+
+<p>Now, we would like to discuss these <code class="java">P(spam)</code> and <code class="java">P(ham)</code> probabilities. <code class="java">P(spam)</code> is the probability of<strong> spam occurrence </strong>in the training dataset. It is the number of rows in the target column labeled as spam divided by the total number of rows. In terms of mathematics, it can be represented as follows:</p>
+
+<p><span class="math-tex">\[P(spam) = {N_{spam} \over N_{spam} + N_{ham}}\]</span>Similarly, <code class="java">P(ham)</code> can be represented as:</p>
+
+<p><span class="math-tex">\[P(ham) = {N_{ham} \over N_{spam} + N_{ham}}\]</span>To classify a message as spam or ham in a sentence, calculate <span class="math-tex">\(P(spam|word_1,word_2,...,word_n)\)</span> and <span class="math-tex">\(P(ham|word_1,word_2,...,word_n)\)</span>, and then compare their values. If:</p>
+
+<p><span class="math-tex">\[P(spam|word_1,word_2,...,word_n) &gt; P(ham|word_1,word_2,...,word_n)\]</span>the sentence is classified as <strong>spam</strong>. But if:</p>
+
+<p><span class="math-tex">\[P(spam|word_1,word_2,...,word_n) &lt; P(ham|word_1,word_2,...,word_n)\]</span>the sentence is classified as <strong>ham</strong>. If the values are equal, classify the sentence as <strong>unknown </strong>for manual reviewing.</p>
+
+<h2>Objectives</h2>
+
+<p>In this stage, your program should:</p>
+
+<ol>
+	<li>Calculate <code class="java">P(ham)</code> and <code class="java">P(spam)</code>;</li>
+	<li>Create a function that can classify a sentence as <code class="java">spam</code>, <code class="java">ham</code>, or <code class="java">unknown</code>;</li>
+	<li>Apply this function to the <code class="java">SMS</code> column of the test dataframe using the <code class="java">.apply</code> function;</li>
+	<li>Print a dataframe containing the first <strong>50 rows</strong> of the predicted and actual results.</li>
+</ol>
+
+<h2>Example</h2>
+
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1:</strong> <em>An example of your program output</em></p>
+
+<pre><code class="language-no-highlight">     Predicted Actual
+1245       ham    ham
+1708       ham    ham
+747       spam   spam
+3744       ham    ham
+3293       ham    ham
+860        ham    ham
+1348       ham    ham
+2858       ham    ham
+4051       ham    ham
+2677       ham    ham
+1439       ham    ham
+1833       ham    ham
+3549       ham    ham
+400       spam   spam
+637        ham    ham
+148        ham    ham
+1900       ham    ham
+5071      spam   spam
+3232       ham    ham
+607        ham    ham
+5298       ham    ham</code></pre>

@@ -1,0 +1,66 @@
+type: edu
+files:
+- name: spam.py
+  visible: true
+  text: |
+    # write your code here
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from hstest.stage_test import List
+    from hstest import *
+    import pandas as pd
+
+
+    class NaiveBayesClassifier(StageTest):
+
+        def generate(self) -> List[TestCase]:
+            return [
+                TestCase(stdin="", attach=("", ""), time_limit=900000)
+            ]
+
+        def check(self, reply: str, attach):
+
+            df = reply.split('\n')
+
+            if len(df) != 52:
+                return CheckResult.wrong("Wrong number of rows")
+
+            if df[0].replace("\\", "").strip().lower().split() != ['predicted', 'actual']:
+                return CheckResult.wrong("Wrong name for the columns")
+
+            indexes = []
+            preds = []
+            actuals = []
+
+            for oneRow in df[1:-1]:
+                idx, pred, actual = oneRow.replace("\\", "").strip().split()
+                indexes.append(idx)
+                preds.append(pred)
+                actuals.append(actual)
+
+            if indexes[:5] != ['1245', '1708', '747', '3744', '3293']:
+                if indexes[-5:] != ['2549', '3430', '3633', '4665', '4033']:
+                    if indexes[38:43] != ['113', '3053', '5455', '3666', '1780']:
+                        return CheckResult.wrong("Wrong order of indices in test dataset")
+
+            if preds[:5] != ["ham", "ham", "spam", "ham", "ham"]:
+                if preds[-5:] != ["ham", "ham", "ham", "ham", "ham"]:
+                    if preds[38:43] != ["spam", "ham", "ham", "ham", "spam"]:
+                        return CheckResult.wrong("Wrong prediction of test dataset")
+
+            if actuals[:5] != ["ham", "ham", "spam", "ham", "ham"]:
+                if actuals[-5:] != ["ham", "ham", "ham", "ham", "ham"]:
+                    if actuals[38:43] != ["spam", "ham", "ham", "ham", "spam"]:
+                        return CheckResult.wrong("Wrong actual values in test dataset")
+
+            return CheckResult.correct()
+
+
+    if __name__ == '__main__':
+        NaiveBayesClassifier().run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/185/stages/942/implement#comment
+status: Unchecked
+record: -1

@@ -1,0 +1,48 @@
+type: edu
+files:
+- name: spam.py
+  visible: true
+  text: |
+    # write your code here
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from hstest.stage_test import List
+    from hstest import *
+
+
+    class NaiveBayesClassifier(StageTest):
+
+        def generate(self) -> List[TestCase]:
+            return [
+                TestCase(stdin="", attach=("", ""), time_limit=900000)
+            ]
+
+        def check(self, reply: str, attach):
+
+            df = reply.replace("{", "").replace("}", "").split(",")
+            metrics = {}
+
+            for oneVal in df:
+                metric, score = oneVal.strip().split(":")
+                metrics[metric.replace("'", "").lower()] = float(score.strip()[:4])
+
+            params = ['accuracy', 'recall', 'precision', 'f1']
+            for param in params:
+                if param not in metrics:
+                    return CheckResult.wrong(f"Can't find '{param}' param in the output!")
+
+            if metrics['accuracy'] < 0.98 or metrics['recall'] < 0.93 or metrics['precision'] < 0.95 or metrics[
+                'f1'] < 0.94:
+                return CheckResult.wrong("Poor metrics. The scores can be improved upon")
+
+            return CheckResult.correct()
+
+
+    if __name__ == '__main__':
+        NaiveBayesClassifier().run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/185/stages/944/implement#comment
+status: Unchecked
+record: -1

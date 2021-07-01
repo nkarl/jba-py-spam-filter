@@ -1,0 +1,77 @@
+type: edu
+files:
+- name: spam.py
+  visible: true
+  text: |
+    # write your code here
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from hstest.stage_test import List
+    from hstest import *
+    import pandas as pd
+
+
+    class NaiveBayesClassifier(StageTest):
+
+        def generate(self) -> List[TestCase]:
+            return [
+                TestCase(stdin="", attach=("", ""), time_limit=900000)
+            ]
+
+        def check(self, reply: str, attach):
+
+            df = reply.split('\n')
+            if len(df) != 1414:
+                return CheckResult.wrong(
+                    "Wrong number of rows and/or columns. Print the first 200 rows and the first 50 columns")
+
+            targets = []
+            for oneRow in df[1:201]:
+                oneRow = oneRow.replace("\\", "").strip().split()
+                targets.append(oneRow[1])
+
+            df_targets = pd.Series(targets)
+            hams = df_targets[df_targets == "ham"].shape[0]
+            spams = df_targets[df_targets == "spam"].shape[0]
+
+            if hams != 170 and spams != 30:
+                return CheckResult.wrong("Incorrect number of ham and/or spam in the first 200 rows")
+
+            aanumbers = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 4, 2, 0, 0, 1, 3, 0, 0, 0,
+                         1, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 8, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 8, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                         0, 1, 0, 6, 4, 0, 0, 8, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6,
+                         0, 0, 0, 0, 0, 0, 1, 2, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 3, 0, 0, 0, 0, 8, 0, 2, 1, 1, 3, 5, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+                         0, 1, 1, 1, 0, 0, 3, 0, 0, 0, 0, 6, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0,
+                         1, 0, 5, 0, 1, 0, 1, 0, 0, 0, 1, 0]
+
+            aanumbers_ = []
+            for oneRow in df[203:403]:
+                oneRow = oneRow.replace("\\", "").strip().split()
+                aanumbers_.append(oneRow[0])
+
+            if len(aanumbers) != len(aanumbers_) and aanumbers != aanumbers_:
+                return CheckResult.wrong("Incorrect BoW vectors")
+
+            if df[0].replace("\\", "").strip().lower().split() != ['target', 'sms', 'a', 'aa', 'aah']:
+                return CheckResult.wrong("Incorrect names for the first five columns")
+
+            if df[202].replace("\\", "").strip().lower().split() != ["aanumbers", "aathi", "abbey", "abdoman", "abel",
+                                                                     "aberdeen", "abi", "ability", "abiola"]:
+                return CheckResult.wrong("Column names from unique words in vocabulary not sorted alphabetically")
+
+            if df[1056].replace("\\", "").strip().lower().split()[1:] != ['0', '0', '1', '0']:
+                return CheckResult.wrong("Incorrect BoW vectors")
+
+            return CheckResult.correct()
+
+
+    if __name__ == '__main__':
+        NaiveBayesClassifier().run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/185/stages/940/implement#comment
+status: Unchecked
+record: -1

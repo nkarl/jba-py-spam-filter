@@ -1,0 +1,32 @@
+<h2>Description</h2>
+
+<p>Congratulations! You have successfully built a working Multinomial Naive Bayes classification model from scratch. It would be a good idea to compare our result with another model. The popular <code class="language-python">Scikit-Learn</code> library also contains an implementation of the Multinomial Naive Bayes classifier, so we will compare how our model performs against it.</p>
+
+<p>The <code class="language-python">Scikit-Learn</code> library doesn't go with text data that well. However, we can covert the <code class="language-python">Target</code> column to <strong>binary numbers </strong>as a workaround. Convert <code class="language-python">ham</code> cells to <code class="language-python">0</code> and <code class="language-python">spam</code> to <code class="language-python">1</code>.</p>
+
+<p>In previous stages, we have mentioned that the <code class="language-python">bag_of_words</code> function should be able to process both training and test sets. We have already created a bag-of-words dataframe with the training set. We will need the <code class="language-python">bag_of_words</code> function in this stage to create a bag-of-words dataframe from the test set:</p>
+
+<pre><code class="language-python">def bag_of_words(split_string, operation="test"):
+   pass
+</code></pre>
+
+<h2>Objectives</h2>
+
+<p>In this stage, your program should:</p>
+
+<ol>
+	<li>Import <code class="language-python">MultinomialNB</code> from <code class="language-python">sklearn.naive_bayes</code>;</li>
+	<li>Convert training and test datasets to BoW dataframes;</li>
+	<li>Convert the text entries in the <code class="language-python">Target</code> column to binary numbers for both training and test BoW dataframes;</li>
+	<li>Train the <code class="language-python">MultionomialNB</code> model with the training BoW dataframe;</li>
+	<li>Make the predictions for the test BoW dataframe.</li>
+	<li>Compute the Accuracy, Recall, Precision, and F1 scores using <code class="language-python">sklearn.metrics</code>.</li>
+</ol>
+
+<p>How is your model compared to the Scikit-Learn MultinomialNB? Better? Worse? Tell us in the comments!</p>
+
+<h2>Example</h2>
+
+<p><strong>Example 1:</strong> <em>An example of your program output</em></p>
+
+<pre><code class="language-no-highlight">{'Accuracy': 0.5838565022421515, 'Recall': 0.5344324322324315, 'Precision': 0.6442064294520508, 'F1': 0.4387755102045817}</code></pre>

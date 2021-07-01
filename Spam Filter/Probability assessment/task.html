@@ -1,0 +1,69 @@
+<h2>Description</h2>
+
+<p>The <strong>Naive Bayes classifier </strong>is a probabilistic model based on the Bayes theorem. You need to write a program that calculates words' conditional probabilities for the spam and ham groups in this stage. The conditional probabilities can be calculated with the equation below:</p>
+
+<p><span class="math-tex">\[P(word_i | spam) = {N_{word_i|spam} \over {N_{spam}} + {N_{vocab}}}\]</span><span class="math-tex">\(N_{word_i|spam}\)</span> is the number of <span class="math-tex">\(word_i\)</span> in spam; <span class="math-tex">\(N_{spam}\)</span> is the total number of words in spam, while <span class="math-tex">\(N_{vocab}\)</span> is the total number of words in the training set vocabulary.</p>
+
+<p><span class="math-tex">\[P(word_i | ham) = {N_{word_i|ham} \over {N_{ham}} + {N_{vocab}}}\]</span> <span class="math-tex">\(N_{word_i|ham}\)</span> is the number of <span class="math-tex">\(word_i\)</span> in ham; <span class="math-tex">\(N_{ham}\)</span>is the total number of words in ham.</p>
+
+<p>To get the probability of whether a given list of words is spam, we need to multiply the conditional probabilities of each word in the sentence by the probability of spam occurring in the dataset. This conditional probability of spam in a list of words is shown below:</p>
+
+<p><span class="math-tex">\[P(spam|word_1,word_2,...,word_n) = P(word_1|spam){*}P(word_2|spam){*}...{*}P(word_n|spam){*}P(spam)\]</span></p>
+
+<p>Similarly, the conditional probability of ham in a given list of words can be calculated as follows:</p>
+
+<p><span class="math-tex">\[P(ham|word_1,word_2,...,word_n) = P(word_1|ham){*}P(word_2|ham){*}...{*}P(word_n|ham){*}P(ham)\]</span></p>
+
+<p>You can take the list of words from <strong>the spam </strong>and <strong>ham </strong>subsets of the training set. Some words from ham do not occur in spam and vice versa. These words are considered <strong>zero-probability words</strong>. If a zero-probability word from the spam subset occurs in a sentence of the test set, the spam conditional probability will be zero. To solve this problem, we will introduce the <strong>Laplace smoothing (<span class="math-tex">\(\alpha\)</span></strong>). </p>
+
+<p>The conditional probability of words in the spam subset can be adjusted as follows:</p>
+
+<p><span class="math-tex">\[P(word_i | spam) = {N_{word_i|spam} + \ \alpha \over {N_{spam}} + \ \alpha{N_{vocab}}}\]</span></p>
+
+<p>while the conditional probability of words in the ham subset becomes:</p>
+
+<p><span class="math-tex">\[P(word_i | ham) = {N_{word_i|ham} + \ \alpha \over {N_{ham}} + \ \alpha{N_{vocab}}}\]</span></p>
+
+<h2>Objectives</h2>
+
+<p>In this stage, your program should:</p>
+
+<ol>
+	<li>Calculate the number of words in the spam group (<span class="math-tex">\(N_{spam}\)</span>) and the ham group(<span class="math-tex">\(N_{ham}\)</span>);</li>
+	<li>Calculate the number of words in the vocabulary (<span class="math-tex">\(N_{vocab}\)</span>);</li>
+	<li>Assume that the <strong>Laplace smoothing </strong>is 1;</li>
+	<li>Calculate the adjusted conditional probability of a word in ham group (<span class="math-tex">\(N_{word_i|ham}\)</span>);</li>
+	<li>Calculate the adjusted conditional probability of a word in spam group (<span class="math-tex">\(N_{word_i|spam}\)</span>);</li>
+	<li>Print the <strong>first 200 </strong>conditional probabilities from the resulting dataframe.</li>
+</ol>
+
+<p><div class="alert alert-warning">Only a part of the conditional probabilities is shown in the example. The <code class="java">index</code> of the dataframe is the unique word of the vocabulary, the columns are <code class="java">Spam Probability</code> and <code class="java">Ham Probability</code> respectively.</div></p>
+
+<h2>Example</h2>
+
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1:</strong> <em>An example of your program</em></p>
+
+<pre><code class="language-no-highlight">           Spam Probability  Ham Probability
+a                   0.000069         0.000162
+aa                  0.000069         0.000065
+aah                 0.000069         0.000129
+aathi               0.000069         0.000194
+abbey               0.000069         0.000065
+abdoman             0.000069         0.000065
+abel                0.000069         0.000065
+aberdeen            0.000138         0.000032
+abi                 0.000069         0.000129
+ability             0.000069         0.000065
+abiola              0.000069         0.000259
+abj                 0.000069         0.000065
+able                0.000069         0.000647
+abnormally          0.000069         0.000065
+aboutas             0.000069         0.000065
+abroad              0.000138         0.000032
+absence             0.000069         0.000065
+absolutely          0.000069         0.000065
+absolutly           0.000069         0.000097
+abstract            0.000069         0.000065
+</code></pre>

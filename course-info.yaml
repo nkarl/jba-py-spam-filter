@@ -1,0 +1,13 @@
+type: hyperskill
+title: Spam Filter
+language: English
+summary: Beep! You received a new message! You reach out for your smartphone only
+  to find out it is another spam message. It is becoming very hard to tell the important
+  messages from hundreds of spam in your inbox. It can also take a lot of time to
+  go through and verify the entire heap. You may want to spend all this time more
+  wisely. Let's build a program that can help you distinguish and filter out spam
+  messages!<br/><br/>Learn more at <a href="https://hyperskill.org">https://hyperskill.org/projects/185</a>
+programming_language: Python
+content:
+- Spam Filter
+mode: Study

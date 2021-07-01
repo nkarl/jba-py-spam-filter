@@ -1,0 +1,83 @@
+<h2>Description</h2>
+
+<p>A typical machine learning pipeline starts with data collection. We will work with the <a target="_blank" href="https://www.kaggle.com/uciml/sms-spam-collection-dataset" rel="noopener noreferrer nofollow">SMS Spam Collection Dataset</a> from the UCI Machine Learning repository. This dataset is updated regularly. We will use the version of the dataset in the <code class="language-python">spam.csv</code> file for this project. You can download it <a target="_blank" href="https://stepik.org/media/attachments/lesson/488383/spam.csv" rel="noopener noreferrer nofollow">here</a>.</p>
+
+<p>Once the data has been collected, we can start preprocessing it. Remove stop words and punctuation marks in this stage. Also, replace all numbers with <code class="language-python">aanumbers</code>, normalize the text, and switch the corpus to lowercase. Use <code class="language-python">SpaCy</code> for text lemmatization and stop word removal; all punctuation marks can be found in the <code class="language-python">string</code> module.</p>
+
+<p>The dataset is a <code class="language-python">.csv</code> file. The <code class="language-python">pandas</code> library contains the <code class="language-python">read_csv</code> method that can create a Pandas dataframe from a CSV file. Don't forget about encoding. It is crucial. We recommend setting the encoding parameter to <code class="language-python">iso-8859-1</code>.</p>
+
+<h2>Objectives</h2>
+
+<p>In this stage, your program should:</p>
+
+<ol>
+	<li>Load a CVS as a pandas dataframe;</li>
+	<li>Iterate over the dataframe;</li>
+	<li>Convert the text to lowercase;</li>
+	<li>Use only the first two columns. Rename the first column as <code class="language-python">Target</code>, the second column as <code class="language-python">SMS</code>.</li>
+	<li>Remove all punctuation marks and stopwords;</li>
+	<li>Change all numbers to <code class="language-python">aanumbers</code>;</li>
+	<li>Insert the processed data back in the original dataframe;</li>
+	<li>Print the first <strong>200 rows</strong> as shown in the example.</li>
+</ol>
+
+<p>Use <code class="language-python">pd.options.display</code> to adjust the shape of your dataframe for display. These options allow you to output the entire dataframe, not the truncated one. For example:</p>
+
+<pre><code class="language-python">pd.options.display.max_columns = dataset.shape[1]
+pd.options.display.max_rows = dataset.shape[0]</code></pre>
+
+<p>Not all cells are displayed in a truncated dataframe. The dataframe is truncated midway as shown in the example:</p>
+
+<pre><code class="language-python">           0         1
+0   0.469112 -0.282863
+1  -1.509059 -1.135632
+..       ...       ...
+5  -0.494929  1.071804
+6   0.721555 -0.706771</code></pre>
+
+<p>You can display the entire dataframe by adjusting <code class="language-python">pd.options</code>. For example:</p>
+
+<pre><code class="language-python">          0         1
+0  0.469112 -0.282863
+1 -1.509059 -1.135632
+2  1.212112 -0.173215
+3  0.119209 -1.044236
+4 -0.861849 -2.104569
+5 -0.494929  1.071804
+6  0.721555 -0.706771</code></pre>
+
+<p><button
+        class="btn-sm btn-outline-secondary"
+        onclick="getElementById('hint-2772').style.display='inline'">
+        Hint
+      </button>
+      <div id="hint-2772" style="display:none;"><code class="language-python">df.iterrows()</code> is a useful method to iterate over the dataframe. Alternatively, you can use <code class="language-python">df.apply()</code> when passing a function that can achieve these steps. Your processed dataframe may contain empty rows. This happens when words in a row contain punctuation signs and/or stopwords.</div></p>
+
+<h2>Example</h2>
+
+<p>The greater-than symbol followed by a space (<code class="language-python">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1: </strong><em>An example of your program output. Remember to output the first 200 rows.</em></p>
+
+<pre><code class="language-no-highlight">     Target                                                SMS
+0       ham  jurong point crazy available bugis n great wor...
+1       ham                              ok lar joke wif u oni
+2      spam  free entry aanumbers wkly comp win fa cup fina...
+3       ham                                u dun early hor u c
+4       ham                                 nah think usf live
+5      spam  freemsg hey darle aanumbers week word like fun...
+6       ham          brother like speak treat like aids patent
+7       ham  request melle melle oru minnaminunginte nurung...
+8      spam  winner value network customer select receivea ...
+9      spam  mobile aanumbers month u r entitle update late...
+10      ham  home soon want talk stuff anymore tonight k cr...
+11     spam  chance win cash aanumbers pound txt aanumbers ...
+12     spam  urgent win aanumbers week free membership priz...
+13      ham  search right word thank breather promise help ...
+14      ham                                        date sunday
+15     spam  xxxmobilemovieclub use credit click wap link t...
+16      ham                                         oh k watch
+17      ham  eh u remember 0xnumbers spell yes v naughty v wet
+18      ham         fine thatåõs way u feel thatåõs way gota b
+19     spam  england v macedonia miss goal team news txt ur...
+20      ham                                    seriously spell</code></pre>

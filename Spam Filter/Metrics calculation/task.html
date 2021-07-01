@@ -1,0 +1,36 @@
+<h2>Description</h2>
+
+<p>After building the Naive Bayes classifier, we need to check its performance. We can use a <strong>confusion matrix </strong>for this. A confusion matrix is a table that describes the performance of a classification model. This is an example of a confusion matrix:</p>
+
+<pre><code class="language-no-highlight">[[True Negative   False Positive]
+ [False Negative  True Positive]]</code></pre>
+
+<p>The accuracy of a classification matrix is the total number of correct predictions divided by the total number of predictions. So it can be calculated like this:</p>
+
+<p><span class="math-tex">\[Accuracy = {TP + TN\over TP + TN + FP + FN}\]</span>Other classification metrics include:</p>
+
+<p><span class="math-tex">\[Recall = {TP \over TP + FN}\]</span></p>
+
+<p><span class="math-tex">\[ Precision = {TP \over TP + FP}\]</span>And finally:</p>
+
+<p><span class="math-tex">\[F1 = {2.precision.recall \over precision + recall}\]</span>If we use these metrics, we will see that the test dataset contains 85% ham and 15% spam. If we try to predict whether a word is ham or not for every database cell, the accuracy would be 85%. In this case, our algorithm has higher accuracy, precision, recall, and F1 scores than a model that predicts whether a word is ham for each row in the test dataframe.</p>
+
+<p>If you're interested in more information on these metrics, take a look at the <a target="_blank" href="https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9?gi=2544a6c39819" rel="noopener noreferrer nofollow">Accuracy, Precision, Recall or F1?</a> article by Towards Data Science.</p>
+
+<h2>Objectives</h2>
+
+<p>In this stage, your program should:</p>
+
+<ol>
+	<li>Calculate the confusion matrix;</li>
+	<li>Calculate the Accuracy, Recall, Precision, and F1 score from the confusion matrix;</li>
+	<li>Print the output as a dictionary.</li>
+</ol>
+
+<h2>Example</h2>
+
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1:</strong> <em>An example of your program output</em></p>
+
+<pre><code class="language-no-highlight">{'Accuracy': 0.5838565022424515, 'Recall': 0.5324324324324315, 'Precision': 0.6452664294520508, 'F1': 0.4387755102040817}</code></pre>

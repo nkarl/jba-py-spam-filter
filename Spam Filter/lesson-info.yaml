@@ -1,0 +1,9 @@
+type: framework
+content:
+- Prepare your data
+- A bag of words
+- Probability assessment
+- Model prediction
+- Metrics calculation
+- Compare the results
+current_task: 0
